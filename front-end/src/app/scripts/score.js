@@ -1,4 +1,5 @@
 import { parseUrl } from "./utils";
+import template from "../views/score.html";
 // TODO #import-html: use ES default imports to import game.html as template
 // TODO #export-functions: remove the IIFE
   // TODO #export-functions: export function ScoreComponent
@@ -9,6 +10,7 @@ import { parseUrl } from "./utils";
     var params = parseUrl();
     // TODO #import-html: assign template to this.template
     this.name = params.name;
+    this.template = template;
     this.size = parseInt(params.size);
     this.time = parseInt(params.time);
   }
