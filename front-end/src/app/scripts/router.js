@@ -6,9 +6,12 @@
    * @param HTMLElement template the template to append
    */
   function renderTemplate(outlet, template) {
-    // TODO #spa: use the DOM API to remove all childNodes of the outlet element
-    // TODO #spa: use the DOM API to append the 'template' element as a child of the 'outlet' element
+    while (outlet.lastChild) {
+    outlet.removeChild(outlet.lastChild);
+    }
+    outlet.appendChild(template);
   }
+  
 
   /**
    * Create a new router. This router will load components into the given outlet.
