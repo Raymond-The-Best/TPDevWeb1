@@ -13,18 +13,18 @@ let CARD_TEMPLATE = ""
 
 // TODO #export-functions: remove the IIFE
 
-  let environment = {
-    api: {
-      host: "http://localhost:8081",
-    },
-  };
+let environment = {
+  api: {
+    host: "http://localhost:8081",
+  },
+};
 
-  // TODO #export-functions: export function GameComponent
-  // TODO #class: use the ES6 class keyword
-  // TODO #extends: extend Component
-  /* class GameComponent constructor */
-  export class GameComponent extends Component{
-    constructor(name){
+// TODO #export-functions: export function GameComponent
+// TODO #class: use the ES6 class keyword
+// TODO #extends: extend Component
+/* class GameComponent constructor */
+export class GameComponent extends Component {
+  constructor(name) {
     // TODO #extends: call super(template)
     // gather parameters from URL
     const params = parseUrl();
@@ -36,8 +36,7 @@ let CARD_TEMPLATE = ""
     this._size = parseInt(params.size) || 9;
     this._flippedCard = null;
     this._matchedPairs = 0;
-    }
-  
+  }
 
   // TODO #export-functions: remove this line
   // put component in global scope, to be runnable right from the HTML.
@@ -45,77 +44,52 @@ let CARD_TEMPLATE = ""
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.init */
-  init() {
+  async init() {
     // fetch the cards configuration from the server
-    this.fetchConfig(
-      // TODO #arrow-function: use arrow function instead.
-      (config) => {
-        this._config = config;
-        this._boardElement = document.querySelector(".cards");
+    this._config = await this.fetchConfig();
 
-        // create cards out of the config
-        // TODO #functional-programming: use Array.map() instead.
-        this._cards = this._config.ids.map((id) => (new CardComponent(id)));  
+    this._boardElement = document.querySelector(".cards");
+    // create cards out of the config
+    // TODO #functional-programming: use Array.map() instead.
+    this._cards = this._config.ids.map((id) => new CardComponent(id));
+    // TODO #functional-programming: use Array.forEach() instead.
+    this._cards.forEach((card) => {
+      this._boardElement.appendChild(card.getElement());
+      card.getElement().addEventListener("click", () => this._flipCard(card));
+    });
+    this.start();
+  }
 
-        // TODO #functional-programming: use Array.forEach() instead.
-        this._cards.forEach((card) => {
-          this._boardElement.appendChild(card.getElement());
-          card.getElement().addEventListener("click", () => this._flipCard(card));
-        });
-        this.start();
-      }
-    );
-  };
-  
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.start */
   start() {
     this._startTime = Date.now();
     let seconds = 0;
     // TODO #template-literals:  use template literals (backquotes)
-    document.querySelector("nav .navbar-title").textContent =
-      `Player: ${this._name}. Elapsed time: ${seconds++}`;
+    document.querySelector("nav .navbar-title").textContent = `Player: ${
+      this._name
+    }. Elapsed time: ${seconds++}`;
 
     this._timer = setInterval(
       // TODO #arrow-function: use arrow function instead.
       () => {
         // TODO #template-literals:  use template literals (backquotes)
-        document.querySelector("nav .navbar-title").textContent =
-          `Player: ${this._name}. Elapsed time: ${seconds++}`;
+        document.querySelector("nav .navbar-title").textContent = `Player: ${
+          this._name
+        }. Elapsed time: ${seconds++}`;
       },
       1000
     );
-  };
+  }
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.fetchConfig */
-  fetchConfig(cb) {
-    let xhr =
-      typeof XMLHttpRequest != "undefined"
-        ? new XMLHttpRequest()
-        : new ActiveXObject("Microsoft.XMLHTTP");
-
-    // TODO #template-literals:  use template literals (backquotes)
-    xhr.open("get", `${environment.api.host}/board?size=${this._size}`, true);
-
-    // TODO #arrow-function: use arrow function instead.
-    xhr.onreadystatechange = () => {
-      let status;
-      let data;
-      // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
-      if (xhr.readyState == 4) {
-        // `DONE`
-        status = xhr.status;
-        if (status == 200) {
-          data = JSON.parse(xhr.responseText);
-          cb(data);
-        } else {
-          throw new Error(status);
-        }
-      }
-    };
-    xhr.send();
-  };
+  async fetchConfig() {
+    const response = await fetch(
+      `${environment.api.host}/board?size=${this._size}`
+    );
+    return response.json();
+  }
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.goToScore */
@@ -131,12 +105,11 @@ let CARD_TEMPLATE = ""
         // TODO #spa: replace with './#score'
         let scorePage = "./#score";
         // TODO #template-literals:  use template literals (backquotes)
-        window.location =
-        `${scorePage}?name=${this._name}&size=${this._size}&time=${timeElapsedInSeconds}`;
+        window.location = `${scorePage}?name=${this._name}&size=${this._size}&time=${timeElapsedInSeconds}`;
       },
       750
     );
-  };
+  }
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent._flipCard */
@@ -194,39 +167,39 @@ let CARD_TEMPLATE = ""
   }
 }
 
-  // TODO #card-component: Change images location to /app/components/game/card/assets/***.png
-  // TODO #import-assets: use ES default import to import images.
-  import back from "../../assets/cards/back.png";
-  import card0 from "../../assets/cards/card-0.png";
-  import card1 from "../../assets/cards/card-1.png";
-  import card2 from "../../assets/cards/card-2.png";
-  import card3 from "../../assets/cards/card-3.png";
-  import card4 from "../../assets/cards/card-4.png";
-  import card5 from "../../assets/cards/card-5.png";
-  import card6 from "../../assets/cards/card-6.png";
-  import card7 from "../../assets/cards/card-7.png";
-  import card8 from "../../assets/cards/card-8.png";
-  import card9 from "../../assets/cards/card-9.png";
-  
-    const CARDS_IMAGE = [
-      back,
-      card0,
-      card1,
-      card2,
-      card3,
-      card4,
-      card5,
-      card6,
-      card7,
-      card8,
-      card9,
-    ]; 
+// TODO #card-component: Change images location to /app/components/game/card/assets/***.png
+// TODO #import-assets: use ES default import to import images.
+import back from "../../assets/cards/back.png";
+import card0 from "../../assets/cards/card-0.png";
+import card1 from "../../assets/cards/card-1.png";
+import card2 from "../../assets/cards/card-2.png";
+import card3 from "../../assets/cards/card-3.png";
+import card4 from "../../assets/cards/card-4.png";
+import card5 from "../../assets/cards/card-5.png";
+import card6 from "../../assets/cards/card-6.png";
+import card7 from "../../assets/cards/card-7.png";
+import card8 from "../../assets/cards/card-8.png";
+import card9 from "../../assets/cards/card-9.png";
 
-  // TODO #class: use the ES6 class keyword
-  // TODO #extends: extends Component
-  /* class CardComponent constructor */
-  class CardComponent extends Component{
-    constructor (id){
+const CARDS_IMAGE = [
+  back,
+  card0,
+  card1,
+  card2,
+  card3,
+  card4,
+  card5,
+  card6,
+  card7,
+  card8,
+  card9,
+];
+
+// TODO #class: use the ES6 class keyword
+// TODO #extends: extends Component
+/* class CardComponent constructor */
+class CardComponent extends Component {
+  constructor(id) {
     // TODO #extends: call super(CARD_TEMPLATE)
     // is this card flipped?
     super(CARD_TEMPLATE);
@@ -248,20 +221,20 @@ let CARD_TEMPLATE = ""
   /* method CardComponent.getElement */
   getElement() {
     return this._elt;
-  };
+  }
 
   // TODO #class: turn function into a method of CardComponent
   /* method CardComponent.flip */
   flip() {
     this._imageElt.classList.toggle("flip");
     this._flipped = !this._flipped;
-  };
+  }
 
   // TODO #class: turn function into a method of CardComponent
   /* method CardComponent.equals */
   equals(card) {
     return card._id === this._id;
-  };
+  }
 
   // TODO #class: turn function into a method of CardComponent
   /* CardComponent.get flipped() */
@@ -269,4 +242,3 @@ let CARD_TEMPLATE = ""
     return this._flipped;
   }
 }
-
