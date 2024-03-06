@@ -1,6 +1,7 @@
-import { parseUrl } from "./utils";
-import { Component } from "./component";
-import template from "../views/score.html";
+import { parseUrl } from "../../scripts/utils";
+import { Component } from "../../scripts/component";
+import template from "./score.component.html";
+import "./score.component.css";
 // TODO #import-html: use ES default imports to import game.html as template
 // TODO #export-functions: remove the IIFE
   // TODO #export-functions: export function ScoreComponent
