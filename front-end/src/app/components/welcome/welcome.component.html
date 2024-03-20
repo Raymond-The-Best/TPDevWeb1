@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>MÈME ory</title>
-
-    <!-- TODO #npm-bootstrap: change css location to '/node_modules/bootstrap/dist/css/bootstrap.css' -->
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/src/app/styles/style.css" />
-    <!-- link to welcome controller -->
     <script src="./welcome.component.js"></script>
   </head>
 
@@ -15,7 +12,6 @@
   
     <section class="overflow-auto flex-grow-1 d-flex flex-column">
       <div class="container-fluid flex-grow-1">
-        <!-- TODO #shell: keep this element -->
         <main class="welcome-cmp">
           <div class="container">
             <form id="start-form" class="form-signin card" novalidate>
@@ -81,8 +77,7 @@
       </div>
     </section>
     <script>
-      // execute the controller
-      var wc = new WelcomeComponent().init();
+      let wc = new WelcomeComponent().init();
     </script>
   </body>
 </html>

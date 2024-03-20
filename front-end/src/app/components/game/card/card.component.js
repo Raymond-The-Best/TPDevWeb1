@@ -1,6 +1,4 @@
 import { Component } from "../../../scripts/component";
-// TODO #card-component: Change images location to /app/components/game/card/assets/***.png
-// TODO #import-assets: use ES default import to import images.
 import back from "./assets/back.png";
 import card0 from "./assets/card-0.png";
 import card1 from "./assets/card-1.png";
@@ -30,17 +28,10 @@ const CARDS_IMAGE = [
 ];
 
 import CARD_TEMPLATE from "./card.component.html";
-
-// TODO #class: use the ES6 class keyword
-// TODO #extends: extends Component
-/* class CardComponent constructor */
 export class CardComponent extends Component {
   constructor(id) {
-    // TODO #extends: call super(CARD_TEMPLATE)
-    // is this card flipped?
     super(CARD_TEMPLATE);
     this._flipped = false;
-    // has the matching card has been discovered already?
     this.matched = false;
 
     this._elt = document.createElement("div");
@@ -53,27 +44,19 @@ export class CardComponent extends Component {
       CARDS_IMAGE[this._id + 1];
     this._imageElt.querySelector("img.back-face").src = CARDS_IMAGE[0];
   }
-
-  /* method CardComponent.getElement */
   getElement() {
     return this._elt;
   }
 
-  // TODO #class: turn function into a method of CardComponent
-  /* method CardComponent.flip */
   flip() {
     this._imageElt.classList.toggle("flip");
     this._flipped = !this._flipped;
   }
 
-  // TODO #class: turn function into a method of CardComponent
-  /* method CardComponent.equals */
   equals(card) {
     return card._id === this._id;
   }
 
-  // TODO #class: turn function into a method of CardComponent
-  /* CardComponent.get flipped() */
   get flipped() {
     return this._flipped;
   }
