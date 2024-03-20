@@ -11,7 +11,7 @@ import card7 from "./assets/card-7.png";
 import card8 from "./assets/card-8.png";
 import card9 from "./assets/card-9.png";
 
-import "./card.component.css";
+import "./card.component.scss";
 
 const CARDS_IMAGE = [
   back,

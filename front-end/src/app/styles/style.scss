@@ -1,7 +1,7 @@
 /*****
  * GLOBAL STYLE
  */
-
+ $primary-color:#cb2468;
 body {
   display: flex;
   flex-flow: column nowrap;
@@ -15,25 +15,23 @@ body {
 body > main {
   overflow: auto;
 }
-
-/* global style */
 .bg-primary {
-  background-color: #cb2468 !important;
+  background-color: $primary-color !important;
 }
 
 .btn-outline-primary {
-  border-color: #cb2468;
-  color: #cb2468;
+  border-color: $primary-color;
+  color: $primary-color;
 }
 
 .btn-outline-primary:hover {
-  border-color: #cb2468;
-  background-color: #cb2468;
+  border-color: $primary-color;
+  background-color: $primary-color;
   color: white;
 }
 
 .form-control:hover,
 .form-control:focus {
   box-shadow: 0 0 0 0.25rem #cb246822;
-  border-color: #cb2468;
+  border-color: $primary-color;
 }
