@@ -24,7 +24,7 @@
 
 12. La programmation orientée-objet pour le web est considérée comme plus facile à maintenir car elle permet la modularisation, l'encapsulation, et la réutilisation de code, pour une plus grande facilité de débogage, des tests et des mises à jour.
 
-13. La programmation fonctionnelle est une manière d'écrire certaines opérations de programmation en chaînant des fonctions les unes après les autres (comme `filter`, `map` ou `reduce`) pour traiter des données de manière concise et efficace.
+13. La programmation fonctionnelle est un paradigme de programmation où les programmes sont construits en appliquant et en composant des fonctions. On retrouve ce type de programmation en Javascript dans certaines opérations de programmation en chaînant des fonctions les unes après les autres (comme `filter`, `map` ou `reduce`) pour traiter des données de manière concise et efficace.
 
 14. La fonction `map()` applique à chaque élément d'une collection une fonction donnée, et retourne la collection ainsi modifiée.
 
